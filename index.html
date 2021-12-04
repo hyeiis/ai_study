@@ -216,9 +216,8 @@
                 // predict can take in an image, video or canvas html element
                 const prediction = await model.predict(webcam.canvas);
                 for (let i = 0; i < maxPredictions; i++) {
-                    const classPrediction =
+                    const classPrediction = prediction[i].className;
                     //prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-                    prediction[i].className;
                     //labelContainer.childNodes[i].innerHTML = classPrediction;
                     console.log(prediction[i].probability);
                     console.log(prediction[i].probability.toFixed(2));
@@ -226,11 +225,54 @@
                         labelContainer
                             .childNodes[i]
                             .innerHTML = classPrediction;
+
+                        switch (prediction[i].className) {
+                            case "경복궁":
+                            document.write("서울특별시 종로구 사직로 161");
+                            document.write("161, Sajik-ro, Jongno-gu, Seoul");
+                            break;
+
+                            case "숭례문":
+                            document.write("서울특별시 중구 남대문로4가 세종대로 40");
+                            document.write("40, Sejong-daero, Namdaemun-ro 4-ga, Jung-gu, Seoul");
+                            break;
+
+                            case "청계천":
+                            document.write("서울특별시 종로구 청계천로 1");
+                            document.write("1, Cheonggyecheon-ro, Jongno-gu, Seoul");
+                            break;
+
+                            case "63빌딩":
+                            document.write("서울특별시 영등포구 63로 50");
+                            document.write("50, 63-ro, Yeongdeungpo-gu, Seoul");
+                            break;
+
+                            case "롯데월드":
+                            document.write("서울특별시 송파구 올림픽로 240");
+                            document.write("240 Olympic-ro, Songpa-gu, Seoul");
+                            break;
+
+                            case "여의도 한강공원":
+                            document.write("서울특별시 영등포구 여의동로 330");
+                            document.write("330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
+                            break;
+
+                            case "명동성당":
+                            document.write("서울특별시 중구 명동길 74");
+                            document.write("74, Myeongdong-gil, Jung-gu, Seoul");
+                            break;
+
+                            case "남산타워":
+                            document.write("서울특별시 용산구 남산공원길 105");
+                            document.write("105, Namsan Gongong-gil, Yongsan-gu, Seoul");
+                            break;
+                        }
                     } else if (document.getElementById("new_btn").value == "true") {
                         labelContainer
                             .childNodes[i]
                             .innerHTML = "";
                     }
+
                 }
                 document
                     .getElementById("new_btn")
