@@ -37,7 +37,11 @@
                 </div>
             </div>
             <div id="label-container"></div>
-            <div id="address-container"></div>
+            <div id="address-ko-container"></div>
+            <div id="explain-ko-container"></div>
+            <br><br>
+            <div id="address-eng-container"></div>
+            <div id="explain-eng-container"></div>
         </div>
         <div id="img_file" style="display:none">
             <script
@@ -87,7 +91,11 @@
             </div>
             <div id="container2">
                 <div id="label-container2"></div>
-                <div id="address-container2"></div>
+                <div id="address-ko-container2"></div>
+                <div id="explain-ko-container2"></div>
+                <br><br>
+                <div id="address-eng-container2"></div>
+                <div id="explain-eng-container2"></div>
             </div>
         </div>
 
@@ -232,9 +240,10 @@
 
                         switch (classPrediction) {
                             case "경복궁":
-                                $("#address-container").html(
-                                    "서울특별시 종로구 사직로 161 (161, Sajik-ro, Jongno-gu, Seoul)"
-                                );
+                                $("#address-ko-container").html("서울특별시 종로구 사직로 161");
+                                $("#explain-ko-container").html("설명");
+                                $("#address-eng-container").html("161, Sajik-ro, Jongno-gu, Seoul");
+                                $("#explain-eng-container").html("explain");
                                 break;
 
                             case "숭례문":
@@ -368,9 +377,10 @@
                                 break;
 
                             case "여의도 한강공원":
-                                $("#address-container2").html(
-                                    "서울특별시 영등포구 여의동로 330 (330, Yeouidong-ro, Yeongdeungpo-gu, Seoul)"
-                                );
+                                $("#address-ko-container2").html("서울특별시 영등포구 여의동로 330");
+                                $("#explain-ko-container2").html("설명");
+                                $("#address-eng-container2").html("330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
+                                $("#explain-eng-container2").html("explain");
                                 break;
 
                             case "명동성당":
