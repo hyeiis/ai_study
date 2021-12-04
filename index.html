@@ -37,6 +37,7 @@
                 </div>
             </div>
             <div id="label-container"></div>
+            <div id="address-container"></div>
         </div>
         <div id="img_file" style="display:none">
             <script
@@ -79,11 +80,13 @@
                                 onclick="predict2()"
                                 style="margin-left:15px">검색(Search)</button>
                         </div>
+
                     </div>
                 </div>
             </div>
             <div id="container2">
                 <div id="label-container2"></div>
+                <div id="address-container2"></div>
             </div>
         </div>
 
@@ -253,8 +256,8 @@
                             break;
 
                             case "여의도 한강공원":
-                            window.print("서울특별시 영등포구 여의동로 330");
-                            window.print("330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
+                            
+                            $("#address-container2").html("서울특별시 영등포구 여의동로 330\n330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
                             break;
 
                             case "명동성당":
@@ -265,7 +268,7 @@
                             case "남산타워":
                             window.print("서울특별시 용산구 남산공원길 105");
                             window.print("105, Namsan Gongong-gil, Yongsan-gu, Seoul");
-                            break;
+
                         }
                     } else if (document.getElementById("new_btn").value == "true") {
                         labelContainer
