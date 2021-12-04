@@ -2,111 +2,137 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+            rel="stylesheet">
         <title>Find your Tour Destination!</title>
+
     </head>
     <body>
-        <div>
-            <h3>Upload the photo you wanna go</h3>
+        <div style="font-size:30px; font-weight:700">관광지 설명</div>
+        <div style="margin-top:15px; margin-bottom:10px">
+            <button type="button" id="start" class="btn" onclick="init()">웹캠으로 검색하기</button>
+            <button type="button" id="img_upload" class="btn" onclick="init2()">이미지로 검색하기</button>
         </div>
-        <button type="button" onclick="init()">Init</button>
-        <button type="button" onclick="predict()">Find</button>
+        <div id="web" style="display:block">
+            <div style="display:flex;align-items:end; margin-bottom:10px">
+                <div id="webcam-container" style="height:200px"></div>
+                <div style="display:flex">
+                    <button
+                        type="button"
+                        class="btn"
+                        id="search_btn"
+                        onclick="predict()"
+                        style="display:none; margin-left:15px">검색</button>
+                    <button
+                        type="button"
+                        class="btn"
+                        id="new_btn"
+                        onclick="new_pic()"
+                        style="display:none;height:45px; margin-left:15px"
+                        value="false">새로고침</button>
+                </div>
+            </div>
+            <div id="label-container"></div>
+        </div>
+        <div id="img_file" style="display:none">
+            <script
+                class="jsbin"
+                src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+            <div class="container file-upload">
+                <div class="image-upload-wrap">
+                    <input
+                        class="file-upload-input"
+                        type='file'
+                        onchange="readURL(this);"
+                        accept="image/*"/>
+                    <div class="drag-text">
+                        <h3 class="mb-5 pb-5 pt-4  upload-text">관광지 사진을 올려놓거나 눌러서 업로드하세요!</h3>
+                    </div>
+                </div>
+                <div class="file-upload-content" style="width:300px">
+                    <img
+                        class="file-upload-image"
+                        id="element-image"
+                        src="#"
+                        style="display:none; width:100%"/>
+                    <div
+                        class="image-title-wrap"
+                        id="remove_box"
+                        style="display:none; margin-top:10px">
+                        <div style="display:flex">
+                            <button
+                                type="button"
+                                onclick="remove_rec(); removeUpload(); "
+                                id="remove_btn"
+                                class="remove-image btn"
+                                value="false">Remove
+                                <span class="image-title">Uploaded Image</span>
+                            </button>
+                            <button
+                                type="button"
+                                id="search"
+                                class="btn"
+                                onclick="predict2()"
+                                style="margin-left:15px">검색</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="container2">
+                <div id="label-container2"></div>
+            </div>
+        </div>
 
         <script
-            class="jsbin"
-            src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <div class="file-upload">
-            <button
-                class="file-upload-btn"
-                type="button"
-                onclick="$('.file-upload-input').trigger( 'click' )">Upload Image</button>
-
-            <div class="image-upload-wrap">
-                <input
-                    class="file-upload-input"
-                    type='file'
-                    onchange="readURL(this);"
-                    accept="image/*"/>
-                <div class="drag-text">
-                    <h3>Drag and drop a file or select add Image</h3>
-                </div>
-            </div>
-            <div class="file-upload-content">
-                <img class="file-upload-image" id="imageId"" src="#" alt="your image"/>
-                <div class="image-title-wrap">
-                    <button type="button" onclick="removeUpload()" class="remove-image">Remove
-                        <span class="image-title">Uploaded Image</span></button>
-                </div>
-            </div>
-        </div>
-
-        <div id="label-container"></div>
+            type="text/javascript"
+            src="https:/ajex.googleapis.com/ajex/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script
+            type="text/javascript"
+            src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script
             src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script
             src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
         <script type="text/javascript">
-            // More API functions here:
-            // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
-            // the link to your model provided by Teachable Machine export panel
-            const URL = "./my_model/";
-
-            let model,
-                labelContainer,
-                maxPredictions;
-
-            // Load the image model and setup the webcam
-            async function init() {
-                const modelURL = URL + "model.json";
-                const metadataURL = URL + "metadata.json";
-
-                // load the model and metadata Refer to tmImage.loadFromFiles() in the API to
-                // support files from a file picker or files from your local hard drive
-                // Note: the pose library adds "tmImage" object to your window (window.tmImage)
-                model = await tmImage.load(modelURL, metadataURL);
-                maxPredictions = model.getTotalClasses();
-
-                labelContainer = document.getElementById("label-container");
-                for (let i = 0; i < maxPredictions; i++) { // and class labels
-                    labelContainer.appendChild(document.createElement("div"));
-                }
+            function new_pic() {
+                document
+                    .getElementById("new_btn")
+                    .value = "true";
+                predict();
             }
 
-            // run the webcam image through the image model
-            async function predict() {
-                // predict can take in an image, video or canvas html element
-                var image = document.getElementById("imageId")
-                const prediction = await model.predict(image, false);
-                for (let i = 0; i < maxPredictions; i++) {
-                    const classPrediction = prediction[i].className + ": " + prediction[i]
-                        .probability
-                        .toFixed(2);
-                    labelContainer
-                        .childNodes[i]
-                        .innerHTML = classPrediction;
-                }
+            function remove_rec() {
+                console.log("?");
+                document
+                    .getElementById("remove_btn")
+                    .value = "true";
+                document
+                    .getElementById("container2")
+                    .style
+                    .display = "none";
             }
-        </script>
 
-        <script>
             function readURL(input) {
+                document
+                    .getElementById("element-image")
+                    .style
+                    .display = "block";
+                document
+                    .getElementById("remove_box")
+                    .style
+                    .display = "block";
                 if (input.files && input.files[0]) {
-
                     var reader = new FileReader();
-
                     reader.onload = function (e) {
                         $('.image-upload-wrap').hide();
-
                         $('.file-upload-image').attr('src', e.target.result);
                         $('.file-upload-content').show();
-
                         $('.image-title').html(input.files[0].name);
                     };
-
                     reader.readAsDataURL(input.files[0]);
-
                 } else {
                     removeUpload();
                 }
@@ -123,6 +149,153 @@
             $('.image-upload-wrap').bind('dragleave', function () {
                 $('.image-upload-wrap').removeClass('image-dropping');
             });
+
+            // More API functions here:
+            // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+            // the link to your model provided by Teachable Machine export panel
+            const URL = "./my_model/";
+
+            let model,
+                webcam,
+                labelContainer,
+                maxPredictions;
+
+            // Load the image model and setup the webcam
+            async function init() {
+                document
+                    .getElementById("web")
+                    .style
+                    .display = "block";
+                document
+                    .getElementById("img_file")
+                    .style
+                    .display = "none";
+                const modelURL = URL + "model.json";
+                const metadataURL = URL + "metadata.json";
+
+                // load the model and metadata Refer to tmImage.loadFromFiles() in the API to
+                // support files from a file picker or files from your local hard drive
+                // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+
+                // Convenience function to setup a webcam
+                const flip = true; // whether to flip the webcam
+                webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+                await webcam.setup(); // request access to the webcam
+                await webcam.play();
+                window.requestAnimationFrame(loop);
+
+                // append elements to the DOM
+                document
+                    .getElementById("webcam-container")
+                    .appendChild(webcam.canvas);
+                labelContainer = document.getElementById("label-container");
+                for (let i = 0; i < maxPredictions; i++) { // and class labels
+                    labelContainer.appendChild(document.createElement("div"));
+                }
+                document
+                    .getElementById("new_btn")
+                    .style
+                    .display = "block";
+                document
+                    .getElementById("search_btn")
+                    .style
+                    .display = "block";
+            }
+
+            async function loop() {
+                webcam.update(); // update the webcam frame
+                //await predict();
+                window.requestAnimationFrame(loop);
+            }
+
+            // run the webcam image through the image model
+            async function predict() {
+                // predict can take in an image, video or canvas html element
+                const prediction = await model.predict(webcam.canvas);
+                for (let i = 0; i < maxPredictions; i++) {
+                    const classPrediction =
+                    //prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                    prediction[i].className;
+                    //labelContainer.childNodes[i].innerHTML = classPrediction;
+                    console.log(prediction[i].probability);
+                    console.log(prediction[i].probability.toFixed(2));
+                    if (prediction[i].probability.toFixed(2) > 0.75) {
+                        labelContainer
+                            .childNodes[i]
+                            .innerHTML = classPrediction;
+                    } else if (document.getElementById("new_btn").value == "true") {
+                        labelContainer
+                            .childNodes[i]
+                            .innerHTML = "";
+                    }
+                }
+                document
+                    .getElementById("new_btn")
+                    .value = "false";
+            }
+
+            async function init2() {
+                document
+                    .getElementById("web")
+                    .style
+                    .display = "none";
+                document
+                    .getElementById("img_file")
+                    .style
+                    .display = "block";
+
+                const modelURL = URL + "model.json";
+                const metadataURL = URL + "metadata.json";
+
+                // load the model and metadata Refer to tmImage.loadFromFiles() in the API to
+                // support files from a file picker or files from your local hard drive
+                // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+                console.log(model);
+
+
+                // append elements to the DOM
+                // document.getElementById("webcam-container").appendChild(webcam.canvas);
+                labelContainer2 = document.getElementById("label-container2");
+                for (let i = 0; i < maxPredictions; i++) { // and class labels
+                    labelContainer2.appendChild(document.createElement("div"));
+                }
+
+            }
+
+            async function predict2() {
+                // predict can take in an image, video or canvas html element
+                var image = document.getElementById("element-image");
+                const prediction = await model.predict(image, false);
+
+                for (let i = 0; i < maxPredictions; i++) {
+                    console.log(document.getElementById("remove_btn").value);
+                    const classPrediction =
+                    //prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                    prediction[i].className;
+                    if (prediction[i].probability.toFixed(2) > 0.75) {
+                        labelContainer2
+                            .childNodes[i]
+                            .innerHTML = classPrediction;
+                    } else if (document.getElementById("remove_btn").value == "true") {
+
+                        labelContainer2
+                            .childNodes[i]
+                            .innerHTML = "";
+                    }
+                    console.log(labelContainer2.childNodes[i].innerHTML);
+                }
+                document
+                    .getElementById("remove_btn")
+                    .value = "false";
+                document
+                    .getElementById("container2")
+                    .style
+                    .display = "block";
+            }
         </script>
 
     </body>
