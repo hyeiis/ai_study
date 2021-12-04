@@ -258,8 +258,8 @@
                             case "여의도 한강공원":
                             window.print("서울특별시 영등포구 여의동로 330");
                             window.print("330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
-                            $("#address-container2").html("서울특별시 영등포구 여의동로 330\n330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
-                            document.getElementById("address-container2").innerHTML = "서울특별시 영등포구 여의동로 330\n330, Yeouidong-ro, Yeongdeungpo-gu, Seoul";
+                            $("#address-container").html("서울특별시 영등포구 여의동로 330\n330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
+                            document.getElementById("address-container").innerHTML = "서울특별시 영등포구 여의동로 330\n330, Yeouidong-ro, Yeongdeungpo-gu, Seoul";
                             break;
 
                             case "명동성당":
@@ -328,6 +328,49 @@
                         labelContainer2
                             .childNodes[i]
                             .innerHTML = classPrediction;
+
+                            switch (classPrediction) {
+                                case "경복궁":
+                                window.print("서울특별시 종로구 사직로 161");
+                                window.print("161, Sajik-ro, Jongno-gu, Seoul");
+                                break;
+    
+                                case "숭례문":
+                                window.print("서울특별시 중구 남대문로4가 세종대로 40");
+                                window.print("40, Sejong-daero, Namdaemun-ro 4-ga, Jung-gu, Seoul");
+                                break;
+    
+                                case "청계천":
+                                window.print("서울특별시 종로구 청계천로 1");
+                                window.print("1, Cheonggyecheon-ro, Jongno-gu, Seoul");
+                                break;
+    
+                                case "63빌딩":
+                                window.print("서울특별시 영등포구 63로 50");
+                                window.print("50, 63-ro, Yeongdeungpo-gu, Seoul");
+                                break;
+    
+                                case "롯데월드":
+                                window.print("서울특별시 송파구 올림픽로 240");
+                                window.print("240 Olympic-ro, Songpa-gu, Seoul");
+                                break;
+    
+                                case "여의도 한강공원":
+                                window.print("서울특별시 영등포구 여의동로 330");
+                                window.print("330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
+                                $("#address-container2").html("서울특별시 영등포구 여의동로 330\n330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
+                                break;
+    
+                                case "명동성당":
+                                window.print("서울특별시 중구 명동길 74");
+                                window.print("74, Myeongdong-gil, Jung-gu, Seoul");
+                                break;
+    
+                                case "남산타워":
+                                window.print("서울특별시 용산구 남산공원길 105");
+                                window.print("105, Namsan Gongong-gil, Yongsan-gu, Seoul");
+
+                            }
                     } else if (document.getElementById("remove_btn").value == "true") {
 
                         labelContainer2
