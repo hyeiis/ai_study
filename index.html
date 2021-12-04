@@ -12,7 +12,7 @@
             <h3>Upload the photo you wanna go</h3>
         </div>
         <button type="button" onclick="init()">Start</button>
-        <button type="button" onclick="predict()">Starts</button>
+        <button type="button" onclick="predict()">Find</button>
 
         <script
             class="jsbin"
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="file-upload-content">
-                <img class="file-upload-image" id='imageId' src="#" alt="your image"/>
+                <img class="file-upload-image" id="imageId"" src="#" alt="your image"/>
                 <div class="image-title-wrap">
                     <button type="button" onclick="removeUpload()" class="remove-image">Remove
                         <span class="image-title">Uploaded Image</span></button>
@@ -83,7 +83,7 @@
             // run the webcam image through the image model
             async function predict() {
                 // predict can take in an image, video or canvas html element
-                var image = document.getElementById('imageId')
+                var image = document.getElementById("imageId")
                 const prediction = await model.predict(image, false);
                 for (let i = 0; i < maxPredictions; i++) {
                     const classPrediction = prediction[i].className + ": " + prediction[i]
