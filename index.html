@@ -322,7 +322,6 @@
                 maxPredictions = model.getTotalClasses();
                 console.log(model);
 
-
                 // append elements to the DOM
                 // document.getElementById("webcam-container").appendChild(webcam.canvas);
                 labelContainer2 = document.getElementById("label-container2");
@@ -349,53 +348,70 @@
 
                         switch (classPrediction) {
                             case "경복궁":
-                                $("#address-container2").html(
-                                    "서울특별시 종로구 사직로 161 (161, Sajik-ro, Jongno-gu, Seoul)"
-                                );
+                                $("#address-container2").html("서울특별시 종로구 사직로 161");
+                                $("#explain-ko-container2").html("");
+                                $("#name-eng2").html("english name");
+                                $("#address-eng-container2").html("161, Sajik-ro, Jongno-gu, Seoul");
+                                $("#explain-eng-container2").html("explain");
                                 break;
 
                             case "숭례문":
-                                $("#address-container2").html(
-                                    "서울특별시 중구 남대문로4가 세종대로 40 (40, Sejong-daero, Namdaemun-ro 4-ga, Jung-gu, Seoul)"
+                                $("#address-container2").html("서울특별시 중구 남대문로4가 세종대로 40");
+                                $("#explain-ko-container2").html("설명");
+                                $("#name-eng2").html("english name");
+                                $("#address-eng-container2").html(
+                                    "40, Sejong-daero, Namdaemun-ro 4-ga, Jung-gu, Seoul"
                                 );
+                                $("#explain-eng-container2").html("explain");
                                 break;
 
                             case "청계천":
-                                $("#address-container2").html(
-                                    "서울특별시 종로구 청계천로 1 (1, Cheonggyecheon-ro, Jongno-gu, Seoul)"
-                                );
+                                $("#address-container2").html("서울특별시 종로구 청계천로 1");
+                                $("#explain-ko-container2").html("설명");
+                                $("#name-eng2").html("english name");
+                                $("#address-eng-container2").html("1, Cheonggyecheon-ro, Jongno-gu, Seoul");
+                                $("#explain-eng-container2").html("explain");
                                 break;
 
                             case "63빌딩":
-                                $("#address-container2").html(
-                                    "서울특별시 영등포구 63로 50 (50, 63-ro, Yeongdeungpo-gu, Seoul)"
-                                );
+                                $("#address-ko-container2").html("서울특별시 영등포구 63로 50");
+                                $("#explain-ko-container2").html("설명");
+                                $("#name-eng2").html("english name");
+                                $("#address-eng-container2").html("50, 63-ro, Yeongdeungpo-gu, Seoul");
+                                $("#explain-eng-container2").html("explain");
                                 break;
 
                             case "롯데월드":
-                                $("#address-container2").html(
-                                    "서울특별시 송파구 올림픽로 240 (240 Olympic-ro, Songpa-gu, Seoul)"
-                                );
+                                $("#address-ko-container2").html("서울특별시 송파구 올림픽로 240");
+                                $("#explain-ko-container2").html("설명");
+                                $("#name-eng2").html("english name");
+                                $("#address-eng-container2").html("240 Olympic-ro, Songpa-gu, Seoul");
+                                $("#explain-eng-container2").html("explain");
                                 break;
 
                             case "여의도 한강공원":
                                 $("#address-ko-container2").html("서울특별시 영등포구 여의동로 330");
-                                $("#explain-ko-container2").html("설명");
+                                $("#explain-ko-container2").html("정치, 금융, 언론의 중심지인 여의도에 자리하고 지하철, 버스 등 대중교통으로 접근성이 좋아 직장인과 일반시민들이 즐겨찾는 명소이자 \n봄꽃축제, 세계불꽃축제, 각종 공연 및 마라톤행사 등 다양한 행사가 이어져 볼거리와 즐길거리가 풍부한 휴식공간입니다. \n또한 밤섬, 여의도 샛강 등이 비교적 자연그대로 보존되어 있어 생태학습장 및 자연친화형 공원으로 조성되어 있습니다.");
                                 $("#name-eng2").html("english name");
                                 $("#address-eng-container2").html("330, Yeouidong-ro, Yeongdeungpo-gu, Seoul");
                                 $("#explain-eng-container2").html("explain");
                                 break;
 
                             case "명동성당":
-                                $("#address-container2").html(
-                                    "서울특별시 중구 명동길 74 (74, Myeongdong-gil, Jung-gu, Seoul)"
-                                );
+                                $("#address-ko-container2").html("서울특별시 중구 명동길 74");
+                                $("#explain-ko-container2").html("설명");
+                                $("#name-eng2").html("english name");
+                                $("#address-eng-container2").html("74, Myeongdong-gil, Jung-gu, Seoul");
+                                $("#explain-eng-container2").html("explain");
                                 break;
 
                             case "남산타워":
-                                $("#address-container2").html(
-                                    "서울특별시 용산구 남산공원길 105 (105, Namsan Gongong-gil, Yongsan-gu, Seoul)"
-                                );
+                                $("#address-container2").html("서울특별시 용산구 남산공원길 105");
+                                $("#explain-ko-container2").html("설명");
+                                $("#name-eng2").html("english name");
+                                $("#address-eng-container2").html("105, Namsan Gongong-gil, Yongsan-gu, Seoul");
+                                $("#explain-eng-container2").html("explain");
+                                break;
 
                         }
                     } else if (document.getElementById("remove_btn").value == "true") {
