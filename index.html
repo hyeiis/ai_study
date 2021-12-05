@@ -36,13 +36,15 @@
                         value="false">새로고침(Refresh)</button>
                 </div>
             </div>
-            <br><strong><div id="label-container"></div></strong>
-            <div id="address-ko-container"></div>
-            <div id="explain-ko-container"></div>
-            <br>
-            <strong><div id="name-eng"></div></strong>
-            <div id="address-eng-container"></div>
-            <div id="explain-eng-container"></div>
+            <div id="container1">
+                <br><strong><div id="label-container"></div></strong>
+                <div id="address-ko-container"></div>
+                <div id="explain-ko-container"></div>
+                <br>
+                <strong><div id="name-eng"></div></strong>
+                <div id="address-eng-container"></div>
+                <div id="explain-eng-container"></div>
+            </div>
         </div>
         <div id="img_file" style="display:none">
             <script
@@ -116,6 +118,7 @@
                 document
                     .getElementById("new_btn")
                     .value = "true";
+                document.getElementById("container1").style.display="none";
                 predict();
             }
 
@@ -303,12 +306,13 @@
                                 break;
 
                         }
+                        document.getElementById("container1").style.display="block";
                     } else if (document.getElementById("new_btn").value == "true") {
                         labelContainer
                             .childNodes[i]
                             .innerHTML = "";
                     }
-
+                    
                 }
                 document
                     .getElementById("new_btn")
